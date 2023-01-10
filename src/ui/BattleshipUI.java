@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class BattleshipUI implements TCPStreamCreatedListener, GameSessionEstablishedListener {
 
     private static final String CREATE = "create";
+    private static final String HELP = "help";
     private static final String JOIN = "join";
     private static final String FIRE = "fire";
     private static final String SET = "set";
@@ -164,6 +165,10 @@ public class BattleshipUI implements TCPStreamCreatedListener, GameSessionEstabl
                     case SET -> this.doSetShips(inputStringArray[1]);
                     case SHOW -> this.doShow();
                     case RULES -> this.doRules();
+                    case HELP -> {
+                        this.printCommands();
+                        this.printStream.println();
+                    }
                     case EXIT -> {
                         again = false;
                         this.doExit();
