@@ -83,6 +83,17 @@ public final class BattleshipEngine {
         return false;
     }
 
+    public static char integerToColumn(int column) throws GameException {
+        if (column < 65 || column > 74) throw new GameException("Incorrect column value.");
+        return (char) column;
+    }
+
+    public static int columnToInteger(char column) throws GameException {
+        int integerValue = column - '0';
+        if (integerValue < 65 || integerValue > 74) throw new GameException("Incorrect column value.");
+        return column - '0';
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                         Getter and Setter                                              //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,8 +142,20 @@ public final class BattleshipEngine {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public String printBoards() throws GameException {
-        StringBuilder stringBuilder = new StringBuilder().append("Your board:\t\t\tEnemies board:\n");
+        StringBuilder stringBuilder = new StringBuilder().append("\tYour board:\t\t\t\t\tEnemies board:\n\n");
+
+        stringBuilder.append("\t");
+        for (int i = 0; i < this.width; i++) {
+            stringBuilder.append(i + 1 + " ");
+        }
+        stringBuilder.append("\t\t");
+        for (int i = 0; i < this.width; i++) {
+            stringBuilder.append(i + 1 + " ");
+        }
+        stringBuilder.append("\n");
+
         for (int i = 0; i < this.height; i++) {
+            stringBuilder.append(integerToColumn(i + 65) + "\t");
             for (int j = 0; j < this.width; j++) {
                 stringBuilder.append(this.yourBattleshipBoard.printField(new Coordinate(i, j))).append(" ");
             }
