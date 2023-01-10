@@ -21,8 +21,6 @@ import java.util.ArrayList;
  */
 public class BattleshipUI implements TCPStreamCreatedListener, GameSessionEstablishedListener {
 
-    private static final String CHEAT_SET = "cheatSet";     // DELETE LATER
-    private static final String CHEAT_FIRE = "cheatFire";   // DELETE LATER
     private static final String CREATE = "create";
     private static final String JOIN = "join";
     private static final String FIRE = "fire";
@@ -160,8 +158,6 @@ public class BattleshipUI implements TCPStreamCreatedListener, GameSessionEstabl
                 }
 
                 switch (inputStringArray[0]) {
-                    case CHEAT_SET -> setNineCorrectShips();
-                    case CHEAT_FIRE -> shootNineCorrectShips();
                     case CREATE -> this.doCreate();
                     case JOIN -> this.doJoin();
                     case FIRE -> this.doFire(inputStringArray[1]);
@@ -322,46 +318,5 @@ public class BattleshipUI implements TCPStreamCreatedListener, GameSessionEstabl
     @Override
     public void gameSessionEstablished(boolean oracle, String enemiesName) {
         this.battleship.enemiesName = enemiesName;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                           cheat methods                                                //
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private void setNineCorrectShips() {
-        try {
-            for (Ship ship: createNineCorrectShips()) {
-                battleship.doSetShips(ship.getStartCoordinate(), ship.getEndCoordinate());
-            }
-        } catch (GameException gameException) {
-            System.out.println("Cheat Error");
-        }
-    }
-
-    private void shootNineCorrectShips() {
-        try {
-            for (Ship ship: createNineCorrectShips()) {
-                for (Coordinate coordinate: ship.getCoordinates()) {
-                    battleship.doFire(coordinate, false);
-                }
-            }
-        } catch (GameException gameException) {
-            System.out.println("Cheat Error");
-        }
-    }
-
-    @SuppressWarnings("DuplicatedCode")
-    private ArrayList<Ship> createNineCorrectShips() throws GameException {
-        return new ArrayList<>() {{
-            add(new Ship(new Coordinate(0, 0), new Coordinate(0, 1)));
-            add(new Ship(new Coordinate(0, 3), new Coordinate(3, 3)));
-            add(new Ship(new Coordinate(0, 6), new Coordinate(0, 9)));
-            add(new Ship(new Coordinate(3, 0), new Coordinate(5, 0)));
-            add(new Ship(new Coordinate(2, 5), new Coordinate(2, 7)));
-            add(new Ship(new Coordinate(2, 9), new Coordinate(3, 9)));
-            add(new Ship(new Coordinate(5, 5), new Coordinate(6, 5)));
-            add(new Ship(new Coordinate(5, 9), new Coordinate(7, 9)));
-            add(new Ship(new Coordinate(7, 0), new Coordinate(7, 1)));
-        }};
     }
 }
