@@ -8,6 +8,9 @@ package battleship;
  * <p>
  * This class is inspired by @author thsc. The class has been modified to fit this game.
  * This is the <a href="https://github.com/thsc42/TicTacToe">link</a> to his repository.
+ * <p>
+ * This project can be found on GitHub on this
+ * <a href="https://github.com/frievoe97/battleship-tcp-java">link</a>.
  *
  * @author friedrichvoelkers
  */

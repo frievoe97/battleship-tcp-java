@@ -149,7 +149,6 @@ public class BattleshipUI implements TCPStreamCreatedListener, GameSessionEstabl
         boolean again = true;
 
         while (again) {
-            System.out.println("tcpStream: " + tcpStream);
             String inputString;
             try {
                 inputString = bufferedReader.readLine();
